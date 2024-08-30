@@ -6,7 +6,7 @@ const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 
 async function runGemini(img: string) {
-const imagem = {
+  const imagem = {
     inlineData: {
       data: img,
       mimeType: "image/jpeg"

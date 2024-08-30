@@ -14,14 +14,14 @@ datasource db {
 }
 
 model Measurement {
-  id       Int      @id @default(autoincrement())
-  customerCode     String @map("customer_code")
+  id              Int      @id @default(autoincrement())
+  customerCode    String   @map("customer_code")
   measureDatetime DateTime @map("measure_datetime")
-  measureType     String @map("measure_type")
-  imageUrl String?  @map("image_url")
-  measureValue    Float? @map("measure_value")
-  measureUuid String? @map("measure_uuid")
-  hasConfirmed Boolean? @map("has_confirmed")
+  measureType     String   @map("measure_type")
+  imageUrl        String?  @map("image_url")
+  measureValue    Float?   @map("measure_value")
+  measureUuid     String?  @map("measure_uuid")
+  hasConfirmed    Boolean  @default(false) @map("has_confirmed")
 
   @@map("measurements")
 }

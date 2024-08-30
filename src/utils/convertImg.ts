@@ -19,5 +19,5 @@ function base64ToImage(base64String: string): string {
 }
 
 export default {
-  base64ToImage
+    base64ToImage
 }

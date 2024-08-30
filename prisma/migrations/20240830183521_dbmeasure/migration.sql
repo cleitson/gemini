@@ -7,7 +7,7 @@ CREATE TABLE `measurements` (
     `image_url` VARCHAR(191) NULL,
     `measure_value` DOUBLE NULL,
     `measure_uuid` VARCHAR(191) NULL,
-    `has_confirmed` BOOLEAN NULL,
+    `has_confirmed` BOOLEAN NOT NULL DEFAULT false,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

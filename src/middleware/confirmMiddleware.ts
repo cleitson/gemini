@@ -2,13 +2,13 @@ import { RequestHandler } from "express";
 import { z } from "zod";
 
 const mySchema = z.object({
-  image: z.string().base64(),
-  customer_code: z.string(),
-  measure_datetime: z.coerce.date(),
-  measure_type: z.enum(["WATER", "GAS"]),
+  measure_uuid: z.string().uuid(),
+  confirmed_value: z.number().int(),
+
 }).required();
 
-const authUploadMiddleware: RequestHandler = (req, res, next) => {
+
+const authConfirmMiddleware: RequestHandler = (req, res, next) => {
 
   try {
     const parsedBody = mySchema.parse(req.body);
@@ -20,6 +20,4 @@ const authUploadMiddleware: RequestHandler = (req, res, next) => {
   }
 }
 
-export default {
-  authUploadMiddleware
-}
+export default authConfirmMiddleware;
