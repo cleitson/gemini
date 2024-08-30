@@ -7,7 +7,7 @@ import convertImg from "../utils/convertImg";
 import genUuid from "../utils/genUuid";
 
 
-const urlBase = 'http://localhost:3000/';
+const urlBase = 'http://localhost:3001/';
 
 const uploadImage = async (upload: UploadRequest): Promise<StatusResponse> => {
 

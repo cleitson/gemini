@@ -1,0 +1,30 @@
+services:
+  gemini:
+    build: .
+    container_name: gemini
+    command: sh -c "npx prisma generate && npm start"
+    ports:
+      - 3001:3001
+    volumes:
+      - ./:/app
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: mysql://root:password@db:3306/geminidb
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    container_name: geminidb
+    image: mysql:8.0.32
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--silent"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 5s

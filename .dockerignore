@@ -1,0 +1,6 @@
+node_modules
+/src/image/*.jpg
+/src/image/*.jpeg
+/src/image/*.png
+/src/image/*.gif
+.env

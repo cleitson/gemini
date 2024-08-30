@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genAI = new GoogleGenerativeAI("AIzaSyDd8yWGR1Hs0aP5xCYuK3U48zlr2dGGqJM");
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
 // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
