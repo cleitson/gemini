@@ -10,3 +10,18 @@ export type ResponseError = {
 };
 
 export type StatusResponse = UploadResponseOk | ResponseError;
+
+
+export type Customer = {
+  measureUuid: string,
+  measureDatetime: Date,
+  measureType: string,
+  hasConfirmed: boolean,
+  imageUrl: string
+}
+export type MeasuresResponse = {
+  customer_code: string,
+  measures: Customer[],
+};
+
+export type GetMeasuresByCustomerResponse = MeasuresResponse | ResponseError;
