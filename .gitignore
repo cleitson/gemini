@@ -27,3 +27,9 @@
 # Arquivos de IDE
 .idea/
 .vscode/
+
+# Imagens dentro da pasta src/image
+/src/image/*.jpg
+/src/image/*.jpeg
+/src/image/*.png
+/src/image/*.gif

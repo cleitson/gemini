@@ -1,11 +1,11 @@
 import fs from 'fs';
 import path from 'path';
 
-function base64ToImage(base64String: string): void {
+function base64ToImage(base64String: string): string {
     // Decodificar a string Base64
     const imgBuffer = Buffer.from(base64String, 'base64');
     // Criar o caminho completo para salvar a imagem
-    const fileName = `image.jpeg`;
+    const fileName = `${Date.now()}.jpeg`;
     const fullPath = path.join('src/image', fileName);
     // Escrever o arquivo de imagem no sistema de arquivos
     fs.writeFile(fullPath, imgBuffer, (err) => {
@@ -15,6 +15,7 @@ function base64ToImage(base64String: string): void {
             console.log('Imagem salva em:', fullPath);
         }
     });
+    return fullPath;
 }
 
 export default {
