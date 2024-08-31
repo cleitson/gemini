@@ -2,7 +2,7 @@
 
 **Descrição**
 
-Este projeto é um backend que tem como proposta ler a imagem de uma conta seja agua/gas e a IA Gemini vision consegue ler a quantidade consumida.
+Este projeto é um backend que tem como proposta ler a imagem de uma conta seja água/gás e a IA Gemini vision consegue ler a quantidade consumida.
 
 
 ## Índice
@@ -19,7 +19,7 @@ Este projeto é um backend que tem como proposta ler a imagem de uma conta seja 
 ## Sobre o Projeto
 
 Esse projeto foi realizado para um teste técnico de backend onde deve-se desenvolver o backend de um serviço que gerencia a leitura individualizada de consumo de água e gás. Para facilitar a coleta da informação, o serviço utilizará IA. <br>
-No total, são 3 endpoints e uma integração com a API do Google Gemini.
+No total, são 3 endpoints e uma integração com a [API do Google Gemini](https://ai.google.dev/gemini-api/docs/vision).
 
 
 ## Tecnologias Utilizadas
@@ -31,7 +31,11 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 ## Instalação
 
 >[!WARNING]
->Urgent info that needs immediate user attention to 
+> É necessário ter o Docker-compose instalado no computador. Para mais informações, consulte [Docker Docs](https://docs.docker.com/desktop/install/windows-install/)
+
+
+> [!IMPORTANT]
+> **ATENÇÃO**: você precisará obter uma chave de acesso para usar essa funcionalidade. Ela é gratuita. Não realize despesas financeiras para executar esse projeto. [Obter uma chave de API](https://ai.google.dev/gemini-api/docs/api-key)
 
 Siga os passos abaixo para instalar e configurar o projeto localmente:
 
@@ -44,18 +48,117 @@ Siga os passos abaixo para instalar e configurar o projeto localmente:
 2. Entre no diretório do projeto:
 
     ```bash
-    cd Fam-Web-Page
+    cd gemini
     ```
 
-3. Instale as dependências:
+3. Executar projeto:
 
     ```bash
-    npm install
+    docker compose up --build
     ```
 
 ## Como Usar
 
-Após a instalação, você pode executar o projeto abrindo o arquivo index.html da pasta raiz.
+Após a instalação, e os conteiners estiverem online ira funcionar no ```localhost:3001/```
+
+```json
+{
+	"message": "Hello, world!"
+}
+```
+O projeto tem as seguintes rotas:
+
+<details>
+<summary>POST /upload</summary>
+
+  > Envia a imagem para a IA do gemini ler a medida e retornar o valor, um link temporário para a imagem e um uuid de identificador.
+
+  ```json
+  Request Body
+    {
+      "image": "base64", // a imagem deve ser uma string formato base64 *e uma string grande*
+      "customer_code": "string",
+      "measure_datetime": "datetime",
+      "measure_type": "WATER" ou "GAS"
+    }
+
+  Response 
+    {
+      "image_url": "string",
+      "measure_value": "interger",
+      "measure_uuid": "string"
+    };
+  ```
+</details>
+
+<details>
+<summary>PATCH /confirm </summary>
+
+  > Para confirmar ou corrigir o valor lido pelo Gemini.
+
+  ```json
+  Request Body
+    {
+      "measure_uuid": "string",
+      "confirmed_value": "interger",
+    }
+
+  Response 
+    {
+      "success": "true"
+    };
+  ```
+</details>
+<details>
+<summary>GET /< customer code >/list </summary>
+
+  > Responsável por listar as medidas realizadas por um determinado cliente.
+
+  ```typescript
+    Ex. localhost:3001/cliente123/list
+  ```
+  > O endpoint tambem aceita query parameter do tipo "WATER" ou "GAS".
+
+  ```typescript
+    Ex. localhost:3001/cliente123/list?measure_type?=WATER
+  ```
+  
+  ```json
+  Response
+    {
+      "customer_code": "string",
+      "measures": [
+        {
+          "measureUuid": "string",
+          "measureDatetime": "Date",
+          "measureType": "string",
+          "hasConfirmed": "boolean",
+          "imageUrl": "string"
+        },
+        {
+          "measureUuid": "string",
+          "measureDatetime": "Date",
+          "measureType": "string",
+          "hasConfirmed": "boolean",
+          "imageUrl": "string"
+        }
+      ]
+    }
+  ```
+</details>
+
+<details>
+  <summary>GET /src/image/</summary>
+
+  > Retorna a imagem que estava em base64 para uma imagem.jpeg
+
+  ```typescript
+    Ex. localhost:3001/src/image/1725065502665.jpeg
+  ```
+
+
+</details>
+
 
 ## Contribuição
 
