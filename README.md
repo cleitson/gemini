@@ -62,9 +62,9 @@ Siga os passos abaixo para instalar e configurar o projeto localmente:
 Após a instalação, e os conteiners estiverem online ira funcionar no ```localhost:3001/```
 
 ```json
-{
-	"message": "Hello, world!"
-}
+    {
+      "message": "Hello, world!"
+    }
 ```
 O projeto tem as seguintes rotas:
 
@@ -73,21 +73,23 @@ O projeto tem as seguintes rotas:
 
   > Envia a imagem para a IA do gemini ler a medida e retornar o valor, um link temporário para a imagem e um uuid de identificador.
 
-  ```json
   Request Body
+  ```json
     {
       "image": "base64", // a imagem deve ser uma string formato base64 *e uma string grande*
       "customer_code": "string",
       "measure_datetime": "datetime",
-      "measure_type": "WATER" ou "GAS"
+      "measure_type": "WATER ou GAS"
     }
+  ```
 
-  Response 
+  Response
+  ```json
     {
       "image_url": "string",
       "measure_value": "interger",
       "measure_uuid": "string"
-    };
+    }
   ```
 </details>
 
@@ -96,17 +98,18 @@ O projeto tem as seguintes rotas:
 
   > Para confirmar ou corrigir o valor lido pelo Gemini.
 
-  ```json
   Request Body
+  ```json
     {
       "measure_uuid": "string",
       "confirmed_value": "interger",
     }
-
+  ```
+  ```json
   Response 
     {
       "success": "true"
-    };
+    }
   ```
 </details>
 <details>
@@ -123,8 +126,8 @@ O projeto tem as seguintes rotas:
     Ex. localhost:3001/cliente123/list?measure_type?=WATER
   ```
   
-  ```json
   Response
+  ```json
     {
       "customer_code": "string",
       "measures": [
